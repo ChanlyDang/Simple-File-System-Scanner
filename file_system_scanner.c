@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <windows.h>
-#include <aclapi.h>
 #include <string.h>
 
 //function calls for file time of creation and time of modification
@@ -11,11 +10,11 @@ int main() {
     // directory I want to scan"E:\\No Malware Zone\\Malware"
     WIN32_FIND_DATA scanned_directory; // defined struct here for obtaining the computing resources in the windows file system
     HANDLE hFind; // defined handle here for tracking resources
-    char fileTypes[9][5] = {".exe", ".zip", ".xlsm", ".vbs", ".ps1", ".bat", ".cmd", ".iso", ".dll"}; // file types that hold malware: .exe, .zip, .xlsm, .vbs, .ps1, .bat, .cmd, .iso, .dll
+    char fileTypes[][6] = {".exe", ".zip", ".xlsm", ".vbs", ".ps1", ".bat", ".cmd", ".iso", ".dll"}; // file types that hold malware: .exe, .zip, .xlsm, .vbs, .ps1, .bat, .cmd, .iso, .dll
     // Use * to get all the files names of the directory, use the file name for just one file
     // the parameters for FindFirstFile(for ANSI) are (given directory, given structure for finding the directory using Windows API, dont forget pointer address symbol)
     hFind = FindFirstFile("C:\\path\\to\\files\\*", &scanned_directory); 
-    FILE *file = fopen("C:\\path\\to\\file\\scan_results.txt", "w"); 
+    FILE *file = fopen("C:\\path\\to\\scan_results.txt", "w"); 
 
     if (hFind == INVALID_HANDLE_VALUE) {
         DWORD error = GetLastError();
