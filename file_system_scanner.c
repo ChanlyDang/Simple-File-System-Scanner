@@ -14,8 +14,8 @@ int main() {
     char fileTypes[9][5] = {".exe", ".zip", ".xlsm", ".vbs", ".ps1", ".bat", ".cmd", ".iso", ".dll"}; // file types that hold malware: .exe, .zip, .xlsm, .vbs, .ps1, .bat, .cmd, .iso, .dll
     // Use * to get all the files names of the directory, use the file name for just one file
     // the parameters for FindFirstFile(for ANSI) are (given directory, given structure for finding the directory using Windows API, dont forget pointer address symbol)
-    hFind = FindFirstFile("C:\\Users\\Chanly\\Downloads\\*", &scanned_directory); 
-    FILE *file = fopen("C:\\Users\\Chanly\\Documents\\Meoware Analysis Arc\\scan_results.txt", "w"); 
+    hFind = FindFirstFile("C:\\path\\to\\files\\*", &scanned_directory); 
+    FILE *file = fopen("C:\\path\\to\\file\\scan_results.txt", "w"); 
 
     if (hFind == INVALID_HANDLE_VALUE) {
         DWORD error = GetLastError();
@@ -93,34 +93,3 @@ void ModifiedTime(FILETIME directory_M, FILE *output) {
         sys_time_local_M.wMonth, sys_time_local_M.wDay, sys_time_local_M.wYear, sys_time_local_M.wHour, sys_time_local_M.wMinute, sys_time_local_M.wSecond);
 }
 
-
-// today 4/20 notes
-// I decided to get rid of the last access time because i was accessing the files when i run the code, so that functionality is pointless atm
-// learned to make things cleaner and put code into functions. at least it looks cleaner but idk how many times i'll be able to reuse it
-// also learned that there is a access control API header for C, needed for showing who has access
-// Ensure that you are not getting the address of variables
-// i would like to eventually get the checksums
-
-// today 4/21 notes
-// learned how to output the terminal output to a separate file
-// need to use fopen to open the file, fclose to close the file within the system, fprintf to print the output to the file
-// also learned that bitwise OR means to use | to combine logic within code
-// also got familiar with passing in arguments using function parameters
-// remember when calling a pointer in a function to just use it without the & if you want the actual variable, and use it with & if you want the address
-// parameter order for sure matters
-// ChatGPT is good for simplifying and understanding pre-made function parameters: Ex. fprintf(write into this file, and write this text with this formatting, using these values)
-
-// today 4/23 notes
-// learning how to error handle
-// learned that errors can have really tight conditions
-// for branch 2, the path of the output file needs to be incorrect
-// for branch 3, anything needs to be wrong and it will spit out a correpsonding error code to look up
-// Next step 5: error handling, need to figure out how to trigger branch 1 (error file not found)
-// Also next: try to add filtering options for only scanning certain types of documents, the most likely candidates for malware
-
-// today 4/27 notes
-// learned how to compare substrings to full strings using the strstr function - strstr(main string, sub string)
-// relearned how to create an array of strings using a matrix of char type data
-// also learned how to iterate through the array using a for loop
-// order and positioning of functions and code matters
-// Next time: Final review of code and any additional error handling techniques before completion
